@@ -2,11 +2,16 @@ package main
 
 import (
     "net/http"
-    "fmt"
+    "github.com/lesteven/goRes"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
+type Pub struct {
+    Service string `json:"service"`
+    Greeting string `json:"greeting"`
+}
 
-    fmt.Fprintf(w, "Hello BackEnd Server!")
+func Home(w http.ResponseWriter, r *http.Request) {
+    data := Pub{"public", "this is the backend server!"}
+    goRes.SendJson(w, 200, data)
 }
 
