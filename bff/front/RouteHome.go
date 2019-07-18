@@ -2,11 +2,17 @@ package main
 
 import (
     "net/http"
-    "fmt"
+    "html/template"
 )
+
+type Person struct {
+    Name string
+}
 
 func Home(w http.ResponseWriter, r *http.Request) {
 
-    fmt.Fprintf(w, "Hello Home!")
+    p := Person{"Steven"}
+    t, _ := template.ParseFiles("home.html")
+    t.Execute(w, p)
 }
 
