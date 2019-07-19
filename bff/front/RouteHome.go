@@ -2,6 +2,7 @@ package main
 
 import (
     "net/http"
+    "log"
     "html/template"
 )
 
@@ -12,7 +13,13 @@ type Person struct {
 func Home(w http.ResponseWriter, r *http.Request) {
 
     p := Person{"Steven"}
-    t, _ := template.ParseFiles("home.html")
-    t.Execute(w, p)
+    //err := t.ExecuteTemplate(w, "home.html", p)
+
+    ts, _ := template.ParseFiles("./templates/home/home.html")
+    err := ts.Execute(w, p)
+
+    if err != nil {
+        log.Fatal("front server home ", err)
+    }
 }
 

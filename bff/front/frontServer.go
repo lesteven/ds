@@ -6,6 +6,9 @@ import (
     "github.com/gorilla/mux"
 )
 
+// ParseGlob equal to ParseFiles w/ list of files
+//var t = template.Must(template.ParseGlob("templates/*/*.html"))
+
 func main() {
     r := mux.NewRouter()
 
