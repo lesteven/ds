@@ -4,6 +4,7 @@ import (
     "log"
     "net/http"
     //"github.com/gorilla/mux"
+    "flag"
 )
 
 // ParseGlob equal to ParseFiles w/ list of files
@@ -11,8 +12,11 @@ import (
 
 func main() {
     //r := mux.NewRouter()
-
     //r.HandleFunc("/", Home)
+
+    // value of addr is pointer to flag
+    addr := flag.String("addr", ":8080", "HTTP port")
+    flag.Parse()
 
     mux := http.NewServeMux()
 
@@ -20,5 +24,5 @@ func main() {
     fileServer := http.FileServer(http.Dir("../ui/static/"))
     mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-    log.Fatal(http.ListenAndServe(":8080", mux))
+    log.Fatal(http.ListenAndServe(*addr, mux))
 }
